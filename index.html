@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry Bodd</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to bottom, #ffe6f0, #fff0f5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 90%;
+  z-index: 5;
+}
+
+button {
+  font-size: 1.2em;
+  padding: 12px 22px;
+  margin: 10px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+button:hover { transform: scale(1.1); }
+
+.yes { background-color: #ff69b4; color: white; }
+.no  { background-color: lightgrey; color: #333; }
+
+/* ===== Result ===== */
+.result {
+  display: none;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.result img {
+  width: 280px;
+  max-width: 80vw;
+  margin-bottom: 15px;
+  filter: hue-rotate(-10deg) saturate(1.15) brightness(1.05);
+}
+
+.result p {
+  font-size: 1.2em;
+  color: #c2185b;
+}
+
+/* ===== Falling flowers ===== */
+.flowers {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.falling-flower {
+  position: absolute;
+  animation: fall 5s linear forwards;
+}
+
+@keyframes fall {
+  from { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+  to   { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="question">
+  <h1>I'm Sorry Babee<br>Maafin aku yaa Mitet😔</h1>
+  <button class="yes" onclick="sayYes()">Ya</button>
+  <button class="no" onclick="sayNo()">GAK</button>
+</div>
+
+<div class="container result" id="result">
+  <img src="flower boquet.png" alt="Bouquet">
+  <p>lovee youu ❤️, ini buat kamu<br>i promise next time ga gitu lagi.<br>i will tell you everything later</p>
+</div>
+
+<div class="flowers" id="flowers"></div>
+
+<script>
+const flowersContainer = document.getElementById("flowers");
+
+function createFallingFlower() {
+  const emojis = ["🌸", "🌷", "🌹", "💐", "🌻"];
+  const flower = document.createElement("span");
+  flower.className = "falling-flower";
+  flower.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+  flower.style.left = Math.random() * 90 + "vw";
+  flower.style.fontSize = 20 + Math.random() * 30 + "px";
+  flowersContainer.appendChild(flower);
+
+  setTimeout(() => flower.remove(), 5000);
+}
+
+// start falling immediately
+setInterval(createFallingFlower, 400);
+
+function sayYes() {
+  document.getElementById("question").style.display = "none";
+  document.getElementById("result").style.display = "block";
+}
+
+function sayNo() {
+  alert("sorry yaa aku janji ga gitu lagi. i will tell you everything.");
+}
+</script>
+
+</body>
+</html>
